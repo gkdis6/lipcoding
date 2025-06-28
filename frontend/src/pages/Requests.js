@@ -17,7 +17,7 @@ const Requests = () => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/api/match-requests');
+      const response = await api.get('/match-requests');
       setRequests(response.data.requests || []);
       setError('');
     } catch (error) {
@@ -31,7 +31,7 @@ const Requests = () => {
   const handleAccept = async (requestId) => {
     setActionLoading(prev => ({ ...prev, [requestId]: true }));
     try {
-      await api.put(`/api/match-requests/${requestId}`, { status: 'accepted' });
+      await api.put(`/match-requests/${requestId}`, { status: 'accepted' });
       setMessage('요청을 수락했습니다.');
       fetchRequests(); // 목록 새로고침
     } catch (error) {
@@ -45,7 +45,7 @@ const Requests = () => {
   const handleReject = async (requestId) => {
     setActionLoading(prev => ({ ...prev, [requestId]: true }));
     try {
-      await api.put(`/api/match-requests/${requestId}`, { status: 'rejected' });
+      await api.put(`/match-requests/${requestId}`, { status: 'rejected' });
       setMessage('요청을 거절했습니다.');
       fetchRequests(); // 목록 새로고침
     } catch (error) {
@@ -59,7 +59,7 @@ const Requests = () => {
   const handleCancel = async (requestId) => {
     setActionLoading(prev => ({ ...prev, [requestId]: true }));
     try {
-      await api.delete(`/api/match-requests/${requestId}`);
+      await api.delete(`/match-requests/${requestId}`);
       setMessage('요청을 취소했습니다.');
       fetchRequests(); // 목록 새로고침
     } catch (error) {
