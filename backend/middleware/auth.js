@@ -20,8 +20,9 @@ async function authenticateToken(req, res, next) {
     // 토큰 검증
     const decoded = verifyToken(token);
     
-    // 사용자 정보 조회
-    const user = await User.findById(decoded.userId);
+    // 사용자 정보 조회 (sub 클레임에서 사용자 ID 추출)
+    const userId = decoded.sub;
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(401).json({
         error: 'Unauthorized',

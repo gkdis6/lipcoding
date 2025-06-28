@@ -96,17 +96,8 @@ async function getMentors(req, res) {
 
     const totalPages = Math.ceil(totalCount / limitNum);
 
-    res.status(200).json({
-      mentors: mentorList,
-      pagination: {
-        current_page: pageNum,
-        total_pages: totalPages,
-        total_count: totalCount,
-        limit: limitNum,
-        has_next: pageNum < totalPages,
-        has_prev: pageNum > 1
-      }
-    });
+    // 단순한 배열 형태로 응답 (프론트엔드 호환성)
+    res.status(200).json(mentorList);
 
   } catch (error) {
     console.error('Get mentors error:', error);
